@@ -42,6 +42,6 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test-full-environment
+      - test-full-environment:
           requires:
             - build
