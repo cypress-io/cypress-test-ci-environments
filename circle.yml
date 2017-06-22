@@ -15,7 +15,6 @@ test-defaults: &test-defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    <<: *docker-defaults
     - image: cypress/internal:chrome58
 
 jobs:
@@ -39,3 +38,4 @@ workflows:
   build_and_test:
     jobs:
       - build
+      - test-full-environment
