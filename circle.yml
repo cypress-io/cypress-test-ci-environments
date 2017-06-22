@@ -17,14 +17,12 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      # need to restore a separate cache for each package.json
-      - restore_cache:
-          key: v2-node_modules-{{ .Branch }}
       - run: npm install
+      - run: npm install cypress@$CYPRESS_TAG
       - save_cache:
-          key: v2-node_modules-{{ .Branch }}-{{ checksum "package.json" }}
+          key: workspace-{{ .Branch }}-{{ .Revision }}
           paths:
-            - node_modules
+            - /home/person/app
 
   ## Docker image with all dependencies - Cypress should work
   test-full-environment:
@@ -33,8 +31,7 @@ jobs:
       - image: cypress/internal:chrome58
     steps:
       - restore_cache:
-          key: v2-node_modules-{{ .Branch }}
-      - run: npm install cypress@$CYPRESS_TAG
+          key: workspace-{{ .Branch }}-{{ .Revision }}
       - run: $(npm bin)/cypress verify
 
 workflows:
