@@ -17,6 +17,10 @@ describe('full good environment', () => {
           === end of shell output
         `
         expect(results.code).to.equal(0, message)
+
+        // make it simple to see the output changes
+        // from the CI output
+        console.log(message)
       })
   })
 })
