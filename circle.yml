@@ -24,6 +24,22 @@ jobs:
       #     paths:
       #       - /home/person/app
 
+  ## Docker image without XVFB - Cypress should NOT work
+  test-bare:
+    <<: *defaults
+    docker:
+      - image: node:6
+        environment:
+          npm_config_loglevel: warn
+          # even when running as non-root user
+          # need to set unsafe perm to be able to do `npm postinstall`
+          npm_config_unsafe-perm: true
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm install cypress@$CYPRESS_TAG
+      - run: npm run test-bare
+
   ## Docker image with all dependencies - Cypress should work
   test-full-environment:
     <<: *defaults
