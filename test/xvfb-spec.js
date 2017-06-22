@@ -6,7 +6,7 @@ describe('environment with XVFB', () => {
   it('is missing dependencies', () => {
     return execa.shell('$(npm bin)/cypress verify')
       .then(results => {
-        const message = stripIndents`
+        const text = stripIndents`
           === start of shell output
           exit code:
             ${results.code}
@@ -16,11 +16,17 @@ describe('environment with XVFB', () => {
             ${results.stderr}
           === end of shell output
         `
-        expect(results.code).not.to.equal(0, message)
+        throw new Error(stripIndents`
+          Somehow verified Cypress without dependencies.
 
+          ${text}
+        `)
+      })
+      .catch(err => {
+        expect(err.message).to.include('spawn Xvfb ENOENT', err.message)
         // make it simple to see the output changes
         // from the CI output
-        console.log(message)
+        console.log(err.message)
       })
   })
 })

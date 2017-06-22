@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "test-full": "mocha --timeout 30000 test/full-environment-spec.js",
     "test-bare": "mocha --timeout 30000 test/bare-spec.js",
-    "test-xvfb": "mocha --timeout 30000 test/xvfb-spec.js"
+    "test-xvfb": "mocha --timeout 30000 test/xvfb-spec.js",
+    "lint": "standard --fix test/*.js"
   },
   "private": true,
   "repository": {
@@ -24,10 +25,13 @@
   "dependencies": {
     "chai": "^4.0.2",
     "execa": "^0.7.0",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "common-tags": "^1.4.0"
   },
   "devDependencies": {
-    "common-tags": "^1.4.0",
-    "cypress": "^0.20.0-dev.20170620.121030"
+    "standard": "^10.0.2"
+  },
+  "standard": {
+    "globals": ["describe", "it"]
   }
 }

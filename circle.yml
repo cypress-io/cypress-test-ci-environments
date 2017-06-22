@@ -6,6 +6,7 @@ defaults: &defaults
   docker:
     - image: cypress/base
       environment:
+        NODE_ENV: production
         npm_config_loglevel: warn
         # even when running as non-root user
         # need to set unsafe perm to be able to do `npm postinstall`
