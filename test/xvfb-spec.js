@@ -3,6 +3,13 @@ const expect = require('chai').expect
 const {stripIndents} = require('common-tags')
 
 describe('environment with XVFB', () => {
+
+  const missingDependenciesMessage = stripIndents`
+    Problem running Cypress application
+    This is usually caused by a missing library or dependency.
+    The error below should indicate which dependency is missing.
+  `
+
   it('is missing dependencies', () => {
     return execa.shell('$(npm bin)/cypress verify')
       .then(results => {
@@ -23,7 +30,7 @@ describe('environment with XVFB', () => {
         `)
       })
       .catch(err => {
-        expect(err.message).to.include('spawn Xvfb ENOENT', err.message)
+        expect(err.message).to.include(missingDependenciesMessage, err.message)
         // make it simple to see the output changes
         // from the CI output
         console.log(err.message)
