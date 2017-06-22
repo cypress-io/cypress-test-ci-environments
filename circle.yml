@@ -6,21 +6,12 @@ defaults: &defaults
   docker:
     - image: cypress/base
       environment:
-        NODE_ENV: production
         npm_config_loglevel: warn
         # even when running as non-root user
         # need to set unsafe perm to be able to do `npm postinstall`
         npm_config_unsafe-perm: true
 
 jobs:
-#   ## code checkout and NPM install
-#   build:
-#     <<: *defaults
-#     steps:
-#       - checkout
-#       - run: npm install
-#       - run: npm install cypress@$CYPRESS_TAG
-
   ## Docker image without XVFB - Cypress should NOT work
   test-bare:
     <<: *defaults
