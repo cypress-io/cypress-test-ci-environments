@@ -19,26 +19,34 @@ jobs:
       - checkout
       - run: npm install
       - run: npm install cypress@$CYPRESS_TAG
-      - save_cache:
-          key: workspace-{{ .Branch }}-{{ .Revision }}
-          paths:
-            - /home/person/app
+      # - save_cache:
+      #     key: workspace-{{ .Branch }}-{{ .Revision }}
+      #     paths:
+      #       - /home/person/app
 
   ## Docker image with all dependencies - Cypress should work
   test-full-environment:
     <<: *defaults
     docker:
       - image: cypress/internal:chrome58
+        environment:
+          npm_config_loglevel: warn
+          # even when running as non-root user
+          # need to set unsafe perm to be able to do `npm postinstall`
+          npm_config_unsafe-perm: true
     steps:
-      - restore_cache:
-          key: workspace-{{ .Branch }}-{{ .Revision }}
-      - run: $(npm bin)/cypress verify
+      - checkout
+      - run: npm install
+      - run: npm install cypress@$CYPRESS_TAG
+      # - restore_cache:
+      #     key: workspace-{{ .Branch }}-{{ .Revision }}
+      # - run: $(npm bin)/cypress verify
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test-full-environment:
-          requires:
-            - build
+      # - build
+      - test-full-environment
+          # requires:
+            # - build
