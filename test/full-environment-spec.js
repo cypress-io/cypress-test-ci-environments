@@ -1,0 +1,22 @@
+const execa = require('execa')
+const expect = require('chai').expect
+const {stripIndents} = require('common-tags')
+
+describe('full good environment', () => {
+  it('verifies', () => {
+    return execa.shell('$(npm bin)/cypress verify')
+      .then(results => {
+        const message = stripIndents`
+          === start of shell output
+          exit code:
+            ${results.code}
+          stdout:
+            ${results.stdout}
+          stderr:
+            ${results.stderr}
+          === end of shell output
+        `
+        expect(results.code).to.equal(0, message)
+      })
+  })
+})
