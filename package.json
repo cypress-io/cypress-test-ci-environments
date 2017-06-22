@@ -1,0 +1,26 @@
+{
+  "name": "cypress-test-ci-environments",
+  "version": "1.0.0",
+  "description": "Confirms that missing XVFB or dependencies can be detected by Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cypress-io/cypress-test-ci-environments.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cypress-io/cypress-test-ci-environments/issues"
+  },
+  "homepage": "https://github.com/cypress-io/cypress-test-ci-environments#readme",
+  "dependencies": {
+    "chai": "^4.0.2",
+    "execa": "^0.7.0",
+    "mocha": "^3.4.2"
+  }
+}

@@ -1,0 +1,33 @@
+version: 2
+
+defaults: &defaults
+  parallelism: 1
+  working_directory: ~/app
+  docker:
+    - image: cypress/base
+      environment:
+        npm_config_loglevel: warn
+        # even when running as non-root user
+        # need to set unsafe perm to be able to do `npm postinstall`
+        npm_config_unsafe-perm: true
+
+jobs:
+  ## code checkout and NPM install
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      # need to restore a separate cache for each package.json
+      - restore_cache:
+          key: node_modules-{{ .Branch }}
+      - run: npm install
+      - save_cache:
+          key: node_modules-{{ .Branch }}-{{ checksum "cli/package.json" }}
+          paths:
+            - node_modules
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
