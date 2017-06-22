@@ -40,7 +40,7 @@ jobs:
       - run: npm install cypress@$CYPRESS_TAG
       # - restore_cache:
       #     key: workspace-{{ .Branch }}-{{ .Revision }}
-      # - run: $(npm bin)/cypress verify
+      - run: $(npm bin)/cypress verify
 
 workflows:
   version: 2
