@@ -30,10 +30,10 @@ describe('environment with XVFB', () => {
         `)
       })
       .catch(err => {
-        expect(err.message).to.include(missingDependenciesMessage, err.message)
         // make it simple to see the output changes
         // from the CI output
         console.log(err.message)
+        expect(err.message).to.include(missingDependenciesMessage)
       })
   })
 })
