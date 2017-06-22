@@ -12,17 +12,13 @@ defaults: &defaults
         npm_config_unsafe-perm: true
 
 jobs:
-  ## code checkout and NPM install
-  build:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm install cypress@$CYPRESS_TAG
-      # - save_cache:
-      #     key: workspace-{{ .Branch }}-{{ .Revision }}
-      #     paths:
-      #       - /home/person/app
+#   ## code checkout and NPM install
+#   build:
+#     <<: *defaults
+#     steps:
+#       - checkout
+#       - run: npm install
+#       - run: npm install cypress@$CYPRESS_TAG
 
   ## Docker image without XVFB - Cypress should NOT work
   test-bare:
@@ -40,8 +36,24 @@ jobs:
       - run: npm install cypress@$CYPRESS_TAG
       - run: npm run test-bare
 
+  ## Docker image with XVFB - Cypress should NOT work
+  test-xvfb:
+    <<: *defaults
+    docker:
+      - image: cypress/internal:xvfb
+        environment:
+          npm_config_loglevel: warn
+          # even when running as non-root user
+          # need to set unsafe perm to be able to do `npm postinstall`
+          npm_config_unsafe-perm: true
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm install cypress@$CYPRESS_TAG
+      - run: npm run test-xvfb
+
   ## Docker image with all dependencies - Cypress should work
-  test-full-environment:
+  test-full:
     <<: *defaults
     docker:
       - image: cypress/internal:chrome58
@@ -60,7 +72,6 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      # - build
-      - test-full-environment
-          # requires:
-            # - build
+      - test-full
+      - test-bare
+      - test-xvfb
