@@ -50,14 +50,6 @@ jobs:
   ## Docker image with all dependencies - Cypress should work
   test-full:
     <<: *defaults
-    docker:
-      - image: cypress/internal:chrome58
-        environment:
-          term: XTERM
-          npm_config_loglevel: warn
-          # even when running as non-root user
-          # need to set unsafe perm to be able to do `npm postinstall`
-          npm_config_unsafe-perm: true
     steps:
       - checkout
       - run: npm install
