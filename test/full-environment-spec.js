@@ -3,8 +3,8 @@ const expect = require('chai').expect
 const {stripIndents} = require('common-tags')
 
 describe('full good environment', () => {
-  it('verifies', () => {
-    return execa.shell('$(npm bin)/cypress run')
+  it('runs', () => {
+    return execa.shell('DEBUG=cypress:* $(npm bin)/cypress run')
     .then(results => {
       const message = stripIndents`
         === start of shell output
