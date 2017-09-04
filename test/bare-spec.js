@@ -27,7 +27,6 @@ describe('bare environment without XVFB', () => {
       .catch(err => {
         // make it simple to see the output changes
         // from the CI output
-        console.log(err.message)
         expect(err.message).to.include(missingXvfbMessage)
       })
   })

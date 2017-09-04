@@ -4,11 +4,8 @@ const {stripIndents} = require('common-tags')
 
 describe('environment with XVFB', () => {
 
-  const missingDependenciesMessage = stripIndents`
-    Problem running Cypress application
-    This is usually caused by a missing library or dependency.
-    The error below should indicate which dependency is missing.
-  `
+  const missingDependenciesMessage = 'This is usually caused by a missing library or dependency.'
+  const missingDependenciesSystemMessage = 'error while loading shared libraries'
 
   it('is missing dependencies', () => {
     return execa.shell('$(npm bin)/cypress verify')
@@ -32,8 +29,8 @@ describe('environment with XVFB', () => {
       .catch(err => {
         // make it simple to see the output changes
         // from the CI output
-        console.log(err.message)
         expect(err.message).to.include(missingDependenciesMessage)
+        expect(err.message).to.include(missingDependenciesSystemMessage)
       })
   })
 })
