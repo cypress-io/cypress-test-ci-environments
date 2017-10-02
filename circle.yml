@@ -27,7 +27,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress@$CYPRESS_TAG
+      - run: echo install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm install $CYPRESS_NPM_PACKAGE_NAME
       - run: npm run test-bare
 
   ## Docker image with XVFB - Cypress should NOT work
@@ -44,7 +45,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress@$CYPRESS_TAG
+      - run: echo install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm install $CYPRESS_NPM_PACKAGE_NAME
       - run: npm run test-xvfb
 
   ## Docker image with all dependencies - Cypress should work
@@ -53,7 +55,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress@$CYPRESS_TAG
+      - run: echo install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm install $CYPRESS_NPM_PACKAGE_NAME
       - run: npm run test-full
 
 workflows:
