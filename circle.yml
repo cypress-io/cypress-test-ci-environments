@@ -35,7 +35,7 @@ jobs:
   test-xvfb:
     <<: *defaults
     docker:
-      - image: cypress/internal:xvfb
+      - image: cypressinternal/xvfb
         environment:
           term: XTERM
           npm_config_loglevel: warn
