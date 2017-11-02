@@ -76,4 +76,5 @@ workflows:
       - test-full
       - test-bare
       - test-xvfb
-      - test-centos7
+      # comment until "clean" container works
+      # - test-centos7
