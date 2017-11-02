@@ -74,4 +74,4 @@ workflows:
       - test-full
       - test-bare
       - test-xvfb
-      # - test-centos7
+      - test-centos7
