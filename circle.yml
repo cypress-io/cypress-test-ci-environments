@@ -69,6 +69,21 @@ jobs:
       - run: npm run verify
       - run: npm run test-full
 
+  ## Ubuntu 16.04 image - Cypress should work
+  test-ubuntu16:
+    <<: *defaults
+    # override just the docker image
+    docker:
+      - image: cypress/base:ubuntu16
+        <<: *environment
+    steps:
+      - checkout
+      - run: npm install
+      - run: echo install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm run verify
+      - run: npm run test-full
+
 workflows:
   version: 2
   build_and_test:
@@ -77,3 +92,4 @@ workflows:
       - test-bare
       - test-xvfb
       - test-centos7
+      - test-ubuntu16
