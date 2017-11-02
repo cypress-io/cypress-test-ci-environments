@@ -51,6 +51,7 @@ jobs:
       - run: npm install
       - run: echo install $CYPRESS_NPM_PACKAGE_NAME
       - run: npm install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm run verify
       - run: npm run test-full
 
   ## Centos7 image - Cypress should work
@@ -65,6 +66,7 @@ jobs:
       - run: npm install
       - run: echo install $CYPRESS_NPM_PACKAGE_NAME
       - run: npm install $CYPRESS_NPM_PACKAGE_NAME
+      - run: npm run verify
       - run: npm run test-full
 
 workflows:
