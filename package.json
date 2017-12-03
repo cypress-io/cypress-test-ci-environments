@@ -25,10 +25,10 @@
     "chai": "^4.0.2",
     "execa": "^0.7.0",
     "mocha": "^3.4.2",
+    "commit-message-install": "^1.4.0",
     "common-tags": "^1.4.0"
   },
   "devDependencies": {
-    "commit-message-install": "^1.4.0",
     "standard": "^10.0.2"
   },
   "standard": {
