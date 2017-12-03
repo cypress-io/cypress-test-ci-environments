@@ -15,9 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/cypress-io/cypress-test-ci-environments.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cypress-io/cypress-test-ci-environments/issues"
   },
@@ -29,9 +27,13 @@
     "common-tags": "^1.4.0"
   },
   "devDependencies": {
+    "commit-message-install": "^1.4.0",
     "standard": "^10.0.2"
   },
   "standard": {
-    "globals": ["describe", "it"]
+    "globals": [
+      "describe",
+      "it"
+    ]
   }
 }
