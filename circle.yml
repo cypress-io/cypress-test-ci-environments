@@ -1,29 +1,28 @@
 version: 2
 
+# all images have same environment variables
+environment: &environment
+  term: XTERM
+  npm_config_loglevel: warn
+  # even when running as non-root user
+  # need to set unsafe perm to be able to do `npm postinstall`
+  npm_config_unsafe-perm: true
+
 defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
     - image: cypress/base
-      environment:
-        term: XTERM
-        npm_config_loglevel: warn
-        # even when running as non-root user
-        # need to set unsafe perm to be able to do `npm postinstall`
-        npm_config_unsafe-perm: true
+      <<: *environment
 
 jobs:
   ## Docker image without XVFB - Cypress should NOT work
   test-bare:
     <<: *defaults
+    # override just the docker image
     docker:
       - image: node:6
-        environment:
-          term: XTERM
-          npm_config_loglevel: warn
-          # even when running as non-root user
-          # need to set unsafe perm to be able to do `npm postinstall`
-          npm_config_unsafe-perm: true
+        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -34,13 +33,8 @@ jobs:
   test-xvfb:
     <<: *defaults
     docker:
-      - image: cypress/internal:xvfb
-        environment:
-          term: XTERM
-          npm_config_loglevel: warn
-          # even when running as non-root user
-          # need to set unsafe perm to be able to do `npm postinstall`
-          npm_config_unsafe-perm: true
+      - image: cypressinternal/xvfb
+        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -54,6 +48,35 @@ jobs:
       - checkout
       - run: npm install
       - run: $(npm bin)/commit-message-install
+      - run: npm run verify
+      - run: npm run test-full
+
+  ## Centos7 image - Cypress should work
+  test-centos7:
+    <<: *defaults
+    # override just the docker image
+    docker:
+      - image: cypress/base:centos7
+        <<: *environment
+    steps:
+      - checkout
+      - run: npm install
+      - run: $(npm bin)/commit-message-install
+      - run: npm run verify
+      - run: npm run test-full
+
+  ## Ubuntu 16.04 image - Cypress should work
+  test-ubuntu16:
+    <<: *defaults
+    # override just the docker image
+    docker:
+      - image: cypress/base:ubuntu16
+        <<: *environment
+    steps:
+      - checkout
+      - run: npm install
+      - run: $(npm bin)/commit-message-install
+      - run: npm run verify
       - run: npm run test-full
 
 workflows:
@@ -63,3 +86,5 @@ workflows:
       - test-full
       - test-bare
       - test-xvfb
+      - test-centos7
+      - test-ubuntu16

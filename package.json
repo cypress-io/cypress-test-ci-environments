@@ -8,7 +8,8 @@
     "test-full": "mocha --timeout 30000 test/full-environment-spec.js",
     "test-bare": "mocha --timeout 30000 test/bare-spec.js",
     "test-xvfb": "mocha --timeout 30000 test/xvfb-spec.js",
-    "lint": "standard --fix test/*.js"
+    "lint": "standard --fix test/*.js",
+    "verify": "cypress verify"
   },
   "private": true,
   "repository": {
