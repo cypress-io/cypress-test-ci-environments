@@ -79,6 +79,7 @@ jobs:
       - image: cypress/base:ubuntu16
         <<: *environment
     steps:
+      - run: git --version
       - checkout
       - run: npm install
       - run: npm install cypress
