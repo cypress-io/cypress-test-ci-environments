@@ -26,8 +26,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: $(npm bin)/commit-message-install
-      - run: npm run test-bare
+      - run: $(npm bin)/commit-message-install || npm install cypress
+      - run: $(npm bin)/run-if npm run test-bare
 
   ## Docker image with XVFB - Cypress should NOT work
   test-xvfb:
@@ -38,8 +38,8 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: $(npm bin)/commit-message-install
-      - run: npm run test-xvfb
+      - run: $(npm bin)/commit-message-install || npm install cypress
+      - run: $(npm bin)/run-if npm run test-xvfb
 
   ## Docker image with all dependencies - Cypress should work
   test-full:
@@ -47,9 +47,9 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: $(npm bin)/commit-message-install
-      - run: npm run verify
-      - run: npm run test-full
+      - run: $(npm bin)/commit-message-install || npm install cypress
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
 
   ## Centos7 image - Cypress should work
   test-centos7:
@@ -61,9 +61,9 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: $(npm bin)/commit-message-install
-      - run: npm run verify
-      - run: npm run test-full
+      - run: $(npm bin)/commit-message-install || npm install cypress
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
 
   ## Ubuntu 16.04 image - Cypress should work
   test-ubuntu16:
@@ -75,9 +75,9 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: $(npm bin)/commit-message-install
-      - run: npm run verify
-      - run: npm run test-full
+      - run: $(npm bin)/commit-message-install || npm install cypress
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
 
 workflows:
   version: 2
