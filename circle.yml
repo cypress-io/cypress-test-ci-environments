@@ -84,7 +84,6 @@ jobs:
       - run: npm install
       - run: npm install cypress
       - run: $(npm bin)/commit-message-install
-      - run: ldd ./node_modules/cypress/dist/Cypress/Cypress
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
