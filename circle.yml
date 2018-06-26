@@ -2,11 +2,11 @@ version: 2
 
 # all images have same environment variables
 environment: &environment
-  term: XTERM
-  npm_config_loglevel: warn
+  - term: XTERM
+  - npm_config_loglevel: warn
   # even when running as non-root user
   # need to set unsafe perm to be able to do `npm postinstall`
-  npm_config_unsafe-perm: true
+  - npm_config_unsafe-perm: true
 
 defaults: &defaults
   parallelism: 1
@@ -22,7 +22,6 @@ jobs:
     # override just the docker image
     docker:
       - image: node:6
-    environment: *environment
     steps:
       - checkout
       - run: npm install
@@ -37,7 +36,6 @@ jobs:
     <<: *defaults
     docker:
       - image: cypressinternal/xvfb
-    environment: *environment
     steps:
       - checkout
       - run: npm install
@@ -62,7 +60,6 @@ jobs:
     # override just the docker image
     docker:
       - image: cypress/base:centos7
-    environment: *environment
     steps:
       - checkout
       - run: npm install
@@ -77,7 +74,6 @@ jobs:
     # override just the docker image
     docker:
       - image: cypress/base:ubuntu16
-    environment: *environment
     steps:
       - run: git --version
       - checkout
