@@ -122,5 +122,7 @@ workflows:
       - test-full-node10.15.3
       - test-bare
       - test-xvfb
-      - test-centos7
+      # disabling this test - has been failing forever
+      # https://github.com/cypress-io/cypress-test-ci-environments/issues/7
+      # - test-centos7
       - test-ubuntu16
