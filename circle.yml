@@ -56,6 +56,19 @@ jobs:
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
+  test-full-node8.15.1:
+    <<: *defaults
+    docker:
+      - image: cypress/base:node8.15.1
+        <<: *environment
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm install cypress
+      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
+
   ## Centos7 image - Cypress should work
   test-centos7:
     <<: *defaults
@@ -92,6 +105,7 @@ workflows:
   build_and_test:
     jobs:
       - test-full
+      - test-full-node8.15.1
       - test-bare
       - test-xvfb
       - test-centos7
