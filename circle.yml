@@ -26,10 +26,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      # hmm, now that we do not include Cypress as a dependency
-      # have to install it
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run test-bare
 
   ## Docker image with XVFB - Cypress should NOT work
@@ -41,8 +38,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run test-xvfb
 
   ## Docker image with all dependencies - Cypress should work
@@ -51,8 +47,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
@@ -64,8 +59,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
@@ -77,8 +71,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
@@ -92,8 +85,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
@@ -108,8 +100,7 @@ jobs:
       - run: git --version
       - checkout
       - run: npm install
-      - run: npm install cypress
-      - run: $(npm bin)/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
 
