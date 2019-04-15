@@ -47,6 +47,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: ls node_modules/.bin
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
