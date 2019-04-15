@@ -28,6 +28,10 @@ jobs:
       - run: npm install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run test-bare
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   ## Docker image with XVFB - Cypress should NOT work
   test-xvfb:
@@ -40,6 +44,10 @@ jobs:
       - run: npm install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run test-xvfb
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   ## Docker image with all dependencies - Cypress should work
   test-full:
@@ -51,6 +59,10 @@ jobs:
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   test-full-node8.15.1:
     <<: *defaults
@@ -63,6 +75,10 @@ jobs:
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   test-full-node10.15.3:
     <<: *defaults
@@ -75,6 +91,10 @@ jobs:
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   ## Centos7 image - Cypress should work
   test-centos7:
@@ -89,6 +109,10 @@ jobs:
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   ## Ubuntu 16.04 image - Cypress should work
   test-ubuntu16:
@@ -104,6 +128,10 @@ jobs:
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   after-tests:
     <<: *defaults
@@ -114,10 +142,6 @@ jobs:
           when: on_success
           name: Set status check
           command: $(npm bin)/set-status --state success --description "on CircleCI"
-      - run:
-          when: on_fail
-          name: Set status check
-          command: $(npm bin)/set-status --state failure --description "on CircleCI"
 
 workflows:
   version: 2
