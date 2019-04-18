@@ -26,6 +26,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run test-bare
       - run:
@@ -159,9 +160,9 @@ workflows:
 
       - after-tests:
           requires:
-          - test-full
-          - test-full-node8.15.1
-          - test-full-node10.15.3
-          - test-bare
-          - test-xvfb
-          - test-ubuntu16
+            - test-full
+            - test-full-node8.15.1
+            - test-full-node10.15.3
+            - test-bare
+            - test-xvfb
+            - test-ubuntu16
