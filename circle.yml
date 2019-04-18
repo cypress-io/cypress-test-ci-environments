@@ -43,6 +43,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run test-xvfb
       - run:
@@ -56,6 +57,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: ls node_modules/.bin
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
@@ -73,6 +75,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
@@ -89,6 +92,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
@@ -107,6 +111,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
@@ -126,6 +131,7 @@ jobs:
       - run: git --version
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
@@ -139,6 +145,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm install @cypress/commit-message-install
       - run:
           when: on_success
           name: Set status check
