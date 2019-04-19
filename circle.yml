@@ -84,6 +84,23 @@ jobs:
           name: Set status check
           command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
+  test-full-node8.9.3:
+    <<: *defaults
+    docker:
+      - image: cypress/base:8.9.3
+        <<: *environment
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm install @cypress/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
+
   test-full-node10.15.3:
     <<: *defaults
     docker:
@@ -156,6 +173,7 @@ workflows:
   build_and_test:
     jobs:
       - test-full
+      - test-full-node8.9.3
       - test-full-node8.15.1
       - test-full-node10.15.3
       - test-bare
@@ -168,6 +186,7 @@ workflows:
       - after-tests:
           requires:
             - test-full
+            - test-full-node8.9.3
             - test-full-node8.15.1
             - test-full-node10.15.3
             - test-bare
