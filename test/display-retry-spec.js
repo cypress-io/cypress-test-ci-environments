@@ -29,7 +29,7 @@ describe('environment with invalid DISPLAY', () => {
       })
   })
 
-  it.only('retries cypress run', () => {
+  it('retries cypress run', () => {
     return execa
       .shell('$(npm bin)/cypress run', {
         env: {
