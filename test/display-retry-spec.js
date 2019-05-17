@@ -1,6 +1,7 @@
 const execa = require('execa')
 const expect = require('chai').expect
 const debug = require('debug')('test')
+const isCI = require('is-ci')
 
 describe('environment with invalid DISPLAY', () => {
   it('retries cypress verify', () => {
@@ -23,9 +24,12 @@ describe('environment with invalid DISPLAY', () => {
         expect(stdout, 'includes incorrect display').to.include(
           'wrong-display-value'
         )
-        expect(stdout, 'includes verified message').to.include(
-          'Verified Cypress!'
-        )
+        if (!isCI) {
+          // we are displaying user message if NOT in CI mode
+          expect(stdout, 'includes verified message').to.include(
+            'Verified Cypress!'
+          )
+        }
       })
   })
 
