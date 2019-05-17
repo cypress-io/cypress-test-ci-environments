@@ -197,6 +197,7 @@ workflows:
       - test-bare
       - test-xvfb
       - test-ubuntu16
+      - test-bad-display-variable
       # disabling this test - has been failing forever
       # https://github.com/cypress-io/cypress-test-ci-environments/issues/7
       # - test-centos7
