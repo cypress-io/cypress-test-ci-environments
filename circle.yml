@@ -12,7 +12,8 @@ defaults: &defaults
   parallelism: 1
   working_directory: ~/app
   docker:
-    - image: cypress/base
+    # be explicit about the Docker image we use
+    - image: cypress/base:8
       <<: *environment
 
 jobs:
@@ -62,6 +63,23 @@ jobs:
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       - run: $(npm bin)/run-if npm run verify
       - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
+
+  # Good image - except the user set DISPLAY to some wrong value
+  # our "cypress verify" and "cypress run"  should retry automatically and work
+  test-bad-display-variable:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm install @cypress/commit-message-install
+      - run: ls node_modules/.bin
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
+      # do not verify Cypress binary - it will be done from the test
+      - run: $(npm bin)/run-if npm run test-display-retry
       - run:
           when: on_fail
           name: Set status check
@@ -192,3 +210,4 @@ workflows:
             - test-bare
             - test-xvfb
             - test-ubuntu16
+            - test-bad-display-variable

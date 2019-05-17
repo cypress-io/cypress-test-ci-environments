@@ -8,6 +8,7 @@
     "test-full": "mocha --timeout 60000 test/full-environment-spec.js",
     "test-bare": "mocha --timeout 30000 test/bare-spec.js",
     "test-xvfb": "mocha --timeout 30000 test/xvfb-spec.js",
+    "test-display-retry": "mocha --timeout 30000 test/display-retry-spec.js",
     "lint": "standard --fix test/*.js",
     "verify": "cypress verify"
   },
@@ -23,11 +24,12 @@
   "homepage": "https://github.com/cypress-io/cypress-test-ci-environments#readme",
   "dependencies": {
     "chai": "^4.0.2",
+    "common-tags": "1.8.0",
     "execa": "0.10.0",
-    "mocha": "^3.4.2",
-    "common-tags": "1.8.0"
+    "mocha": "^3.4.2"
   },
   "devDependencies": {
+    "debug": "^4.1.1",
     "standard": "^10.0.2"
   },
   "standard": {
