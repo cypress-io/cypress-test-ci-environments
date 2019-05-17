@@ -1,4 +1,4 @@
-# cypress-test-ci-environments
+# cypress-test-ci-environments [![renovate-app badge][renovate-badge]][renovate-app]
 
 > Confirms that missing XVFB or dependencies can be detected by Cypress
 
@@ -25,3 +25,6 @@ Run tests with environment variable `DEBUG` for example
 ```
 DEBUG=test npm run test-display-retry
 ```
+
+[renovate-badge]: https://img.shields.io/badge/renovate-app-blue.svg
+[renovate-app]: https://renovateapp.com/
