@@ -23,15 +23,15 @@
   },
   "homepage": "https://github.com/cypress-io/cypress-test-ci-environments#readme",
   "dependencies": {
-    "chai": "^4.0.2",
+    "chai": "4.1.2",
     "common-tags": "1.8.0",
     "execa": "0.10.0",
-    "mocha": "^3.4.2",
-    "debug": "^4.1.1",
+    "mocha": "3.5.3",
+    "debug": "4.1.1",
     "is-ci": "2.0.0"
   },
   "devDependencies": {
-    "standard": "^10.0.2"
+    "standard": "10.0.3"
   },
   "standard": {
     "globals": [
