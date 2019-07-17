@@ -105,7 +105,9 @@ jobs:
   test-full-node8.9.3:
     <<: *defaults
     docker:
-      - image: cypress/base:8.9.3
+      # use a newer Docker image with better NPM version to avoid
+      # installation problems
+      - image: cypress/base:8.9.3-npm-6.10.1
         <<: *environment
     steps:
       - checkout
