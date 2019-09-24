@@ -21,7 +21,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run: npm install
+      - run: npm ci
       - run: npm run lint
 
   ## Docker image without XVFB - Cypress should NOT work
