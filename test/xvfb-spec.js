@@ -7,7 +7,7 @@ describe('environment with XVFB', () => {
   const missingDependenciesSystemMessage = 'error while loading shared libraries'
 
   it('is missing dependencies', () => {
-    return execa('$(npm bin)/cypress verify', {shell: true})
+    return execa.shell('$(npm bin)/cypress verify')
       .then(results => {
         const text = stripIndents`
           === start of shell output

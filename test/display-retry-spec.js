@@ -5,12 +5,12 @@ const isCI = require('is-ci')
 
 describe('environment with invalid DISPLAY', () => {
   it('retries cypress verify', () => {
-    return execa('$(npm bin)/cypress verify', {
-      shell: true,
-      env: {
-        DISPLAY: 'wrong-display-value'
-      }
-    })
+    return execa
+      .shell('$(npm bin)/cypress verify', {
+        env: {
+          DISPLAY: 'wrong-display-value'
+        }
+      })
       .then(({ stdout, code, stderr }) => {
         debug('exit code %d', code)
         debug('stderr\n%s', stderr)
@@ -34,12 +34,12 @@ describe('environment with invalid DISPLAY', () => {
   })
 
   it('retries cypress run', () => {
-    return execa('$(npm bin)/cypress run', {
-      shell: true,
-      env: {
-        DISPLAY: 'wrong-display-value'
-      }
-    })
+    return execa
+      .shell('$(npm bin)/cypress run', {
+        env: {
+          DISPLAY: 'wrong-display-value'
+        }
+      })
       .then(({ stdout, code, stderr }) => {
         debug('exit code %d', code)
         debug('stderr\n%s', stderr)

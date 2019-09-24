@@ -4,7 +4,7 @@ const {stripIndents} = require('common-tags')
 
 describe('full good environment', () => {
   it('runs', () => {
-    return execa('DEBUG=cypress:* $(npm bin)/cypress run', {shell: true})
+    return execa.shell('DEBUG=cypress:* $(npm bin)/cypress run')
     .then(results => {
       const message = stripIndents`
         === start of shell output
