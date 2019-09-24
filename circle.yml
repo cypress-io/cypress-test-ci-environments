@@ -86,15 +86,14 @@ jobs:
   # our "cypress verify" and "cypress run"  should retry automatically and work
   test-bad-display-variable:
     <<: *defaults
-    <<: *environment
     steps:
+      - run: echo "TERM is $TERM"
       - checkout
       - run: npm install
       - run: npm install @cypress/commit-message-install
       - run: ls node_modules/.bin
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       # do not verify Cypress binary - it will be done from the test
-      - run: echo "TERM is $TERM and term is $term"
       - run: $(npm bin)/run-if npm run test-display-retry
       - run:
           when: on_fail
