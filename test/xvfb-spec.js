@@ -3,7 +3,6 @@ const expect = require('chai').expect
 const {stripIndents} = require('common-tags')
 
 describe('environment with XVFB', () => {
-
   const missingDependenciesMessage = 'This is usually caused by a missing library or dependency.'
   const missingDependenciesSystemMessage = 'error while loading shared libraries'
 

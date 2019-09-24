@@ -17,6 +17,13 @@ defaults: &defaults
       <<: *environment
 
 jobs:
+  lint:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run lint
+
   ## Docker image without XVFB - Cypress should NOT work
   test-bare:
     <<: *defaults
@@ -192,6 +199,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - lint
       - test-full
       - test-full-node8.9.3
       - test-full-node8.15.1
@@ -206,6 +214,7 @@ workflows:
 
       - after-tests:
           requires:
+            - lint
             - test-full
             - test-full-node8.9.3
             - test-full-node8.15.1
