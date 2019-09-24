@@ -12,9 +12,9 @@ describe('environment with invalid DISPLAY', () => {
         }
       })
       .then(({ stdout, code, stderr }) => {
-        debug('exit code', code)
-        debug('stderr', stderr)
-        debug('stdout', stdout)
+        debug('exit code %d', code)
+        debug('stderr\n%s', stderr)
+        debug('stdout\n%s', stdout)
 
         expect(code, 'finished with 0').to.equal(0)
         expect(stderr, 'no error output').to.equal('')
@@ -41,9 +41,9 @@ describe('environment with invalid DISPLAY', () => {
         }
       })
       .then(({ stdout, code, stderr }) => {
-        debug('exit code', code)
-        debug('stderr', stderr)
-        debug('stdout', stdout)
+        debug('exit code %d', code)
+        debug('stderr\n%s', stderr)
+        debug('stdout\n%s', stdout)
 
         expect(code, 'finished with 0').to.equal(0)
         expect(stderr, 'no error output').to.equal('')
