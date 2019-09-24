@@ -6,7 +6,7 @@ describe('bare environment without XVFB', () => {
   const missingXvfbMessage = 'spawn Xvfb ENOENT'
 
   it('says XVFB is unavailable', () => {
-    return execa.shell('$(npm bin)/cypress verify')
+    return execa('$(npm bin)/cypress verify', {shell: true})
       .then(results => {
         const text = stripIndents`
           === start of shell output
