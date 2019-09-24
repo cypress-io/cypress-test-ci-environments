@@ -2,11 +2,12 @@ version: 2
 
 # all images have same environment variables
 environment: &environment
-  TERM: xterm
-  npm_config_loglevel: warn
-  # even when running as non-root user
-  # need to set unsafe perm to be able to do `npm postinstall`
-  npm_config_unsafe-perm: true
+  environment:
+    TERM: xterm
+    npm_config_loglevel: warn
+    # even when running as non-root user
+    # need to set unsafe perm to be able to do `npm postinstall`
+    npm_config_unsafe-perm: true
 
 defaults: &defaults
   parallelism: 1
