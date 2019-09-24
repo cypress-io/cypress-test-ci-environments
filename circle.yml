@@ -93,6 +93,7 @@ jobs:
       - run: ls node_modules/.bin
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
       # do not verify Cypress binary - it will be done from the test
+      - run: echo "TERM is $TERM and term is $term"
       - run: $(npm bin)/run-if npm run test-display-retry
       - run:
           when: on_fail
