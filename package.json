@@ -28,9 +28,7 @@
     "execa": "0.11.0",
     "mocha": "6.2.0",
     "debug": "4.1.1",
-    "is-ci": "2.0.0"
-  },
-  "devDependencies": {
+    "is-ci": "2.0.0",
     "standard": "10.0.3"
   },
   "standard": {
