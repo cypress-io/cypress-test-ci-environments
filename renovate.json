@@ -12,5 +12,15 @@
   "schedule": [
     "every weekend"
   ],
-  "masterIssue": true
+  "masterIssue": true,
+  "packageRules": [
+    {
+      "packageNames": ["execa"],
+      "enabled": false
+    },
+    {
+      "packageNames": ["standard"],
+      "enabled": false
+    }
+  ]
 }
