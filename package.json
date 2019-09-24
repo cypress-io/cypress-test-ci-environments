@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "test-full": "mocha --timeout 60000 test/full-environment-spec.js",
-    "test-bare": "mocha --timeout 30000 test/bare-spec.js",
-    "test-xvfb": "mocha --timeout 30000 test/xvfb-spec.js",
-    "test-display-retry": "mocha --timeout 30000 test/display-retry-spec.js",
+    "test-bare": "mocha --timeout 60000 test/bare-spec.js",
+    "test-xvfb": "mocha --timeout 60000 test/xvfb-spec.js",
+    "test-display-retry": "mocha --timeout 60000 test/display-retry-spec.js",
     "lint": "standard --fix test/*.js",
     "verify": "cypress verify"
   },

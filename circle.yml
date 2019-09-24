@@ -14,11 +14,11 @@ defaults: &defaults
   docker:
     # be explicit about the Docker image we use
     - image: cypress/base:8
-      <<: *environment
 
 jobs:
   lint:
     <<: *defaults
+    <<: *environment
     steps:
       - checkout
       - restore_cache:
@@ -34,10 +34,10 @@ jobs:
   ## Docker image without XVFB - Cypress should NOT work
   test-bare:
     <<: *defaults
+    <<: *environment
     # override just the docker image
     docker:
       - image: node:6
-        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -52,9 +52,9 @@ jobs:
   ## Docker image with XVFB - Cypress should NOT work
   test-xvfb:
     <<: *defaults
+    <<: *environment
     docker:
       - image: cypressinternal/xvfb
-        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -69,6 +69,7 @@ jobs:
   ## Docker image with all dependencies - Cypress should work
   test-full:
     <<: *defaults
+    <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -86,6 +87,7 @@ jobs:
   # our "cypress verify" and "cypress run"  should retry automatically and work
   test-bad-display-variable:
     <<: *defaults
+    <<: *environment
     steps:
       - run: echo "TERM is $TERM"
       - checkout
@@ -102,9 +104,9 @@ jobs:
 
   test-full-node8.15.1:
     <<: *defaults
+    <<: *environment
     docker:
       - image: cypress/base:8.15.1
-        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -119,11 +121,11 @@ jobs:
 
   test-full-node8.9.3:
     <<: *defaults
+    <<: *environment
     docker:
       # use a newer Docker image with better NPM version to avoid
       # installation problems
       - image: cypress/base:8.9.3-npm-6.10.1
-        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -138,9 +140,9 @@ jobs:
 
   test-full-node10.15.3:
     <<: *defaults
+    <<: *environment
     docker:
       - image: cypress/base:10.15.3
-        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -155,11 +157,11 @@ jobs:
 
   ## Centos7 image - Cypress should work
   test-centos7:
+    <<: *environment
     <<: *defaults
     # override just the docker image
     docker:
       - image: cypress/base:centos7
-        <<: *environment
     steps:
       - checkout
       - run: npm install
@@ -175,10 +177,10 @@ jobs:
   ## Ubuntu 16.04 image - Cypress should work
   test-ubuntu16:
     <<: *defaults
+    <<: *environment
     # override just the docker image
     docker:
       - image: cypress/base:ubuntu16
-        <<: *environment
     steps:
       - run: git --version
       - checkout
@@ -194,6 +196,7 @@ jobs:
 
   after-tests:
     <<: *defaults
+    <<: *environment
     steps:
       - checkout
       - run: npm install
