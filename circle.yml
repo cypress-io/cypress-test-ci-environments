@@ -86,6 +86,7 @@ jobs:
   # our "cypress verify" and "cypress run"  should retry automatically and work
   test-bad-display-variable:
     <<: *defaults
+    <<: *environment
     steps:
       - checkout
       - run: npm install
