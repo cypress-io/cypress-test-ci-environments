@@ -212,14 +212,22 @@ workflows:
   build_and_test:
     jobs:
       - lint
-      - test-full
-      - test-full-node8.9.3
-      - test-full-node8.15.1
-      - test-full-node10.15.3
-      - test-bare
-      - test-xvfb
-      - test-ubuntu16
-      - test-bad-display-variable
+      - test-full:
+          context: test-runner:commit-status-checks
+      - test-full-node8.9.3:
+          context: test-runner:commit-status-checks
+      - test-full-node8.15.1:
+          context: test-runner:commit-status-checks
+      - test-full-node10.15.3:
+          context: test-runner:commit-status-checks
+      - test-bare:
+          context: test-runner:commit-status-checks
+      - test-xvfb:
+          context: test-runner:commit-status-checks
+      - test-ubuntu16:
+          context: test-runner:commit-status-checks
+      - test-bad-display-variable:
+          context: test-runner:commit-status-checks
       # disabling this test - has been failing forever
       # https://github.com/cypress-io/cypress-test-ci-environments/issues/7
       # - test-centos7
