@@ -225,6 +225,7 @@ workflows:
       # - test-centos7
 
       - after-tests:
+          context: test-runner:commit-status-checks
           requires:
             - lint
             - test-full
