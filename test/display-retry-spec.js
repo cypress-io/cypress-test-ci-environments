@@ -46,7 +46,6 @@ describe('environment with invalid DISPLAY', () => {
         debug('stdout\n%s', stdout)
 
         expect(code, 'finished with 0').to.equal(0)
-        expect(stderr, 'no error output').to.equal('')
         expect(stdout, 'includes warning').to.include(
           'Warning: Cypress failed to start'
         )
