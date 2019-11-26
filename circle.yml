@@ -14,7 +14,8 @@ defaults: &defaults
   working_directory: ~/app
   docker:
     # be explicit about the Docker image we use
-    - image: cypress/base:8
+    # probably matches the current bundled version of Node in the test runner
+    - image: cypress/base:12.0.0
 
 jobs:
   lint:
@@ -38,7 +39,7 @@ jobs:
     <<: *environment
     # override just the docker image
     docker:
-      - image: node:6
+      - image: node:12
     steps:
       - checkout
       - run: npm install
