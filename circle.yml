@@ -178,12 +178,31 @@ jobs:
           command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
   ## Ubuntu 16.04 image - Cypress should work
-  test-ubuntu16:
+  test-ubuntu16-node8:
     <<: *defaults
     <<: *environment
     # override just the docker image
     docker:
-      - image: cypress/base:ubuntu16
+      - image: cypress/base:ubuntu16-8
+    steps:
+      - run: git --version
+      - checkout
+      - run: npm install
+      - run: npm install @cypress/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
+
+  test-ubuntu16-node12:
+    <<: *defaults
+    <<: *environment
+    # override just the docker image
+    docker:
+      - image: cypress/base:ubuntu16-12.13.1
     steps:
       - run: git --version
       - checkout
@@ -226,7 +245,9 @@ workflows:
           context: test-runner:commit-status-checks
       - test-xvfb:
           context: test-runner:commit-status-checks
-      - test-ubuntu16:
+      - test-ubuntu16-node8:
+          context: test-runner:commit-status-checks
+      - test-ubuntu16-node12:
           context: test-runner:commit-status-checks
       - test-bad-display-variable:
           context: test-runner:commit-status-checks
@@ -244,5 +265,6 @@ workflows:
             - test-full-node10.15.3
             - test-bare
             - test-xvfb
-            - test-ubuntu16
+            - test-ubuntu16-node8
+            - test-ubuntu16-node12
             - test-bad-display-variable
