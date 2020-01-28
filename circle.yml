@@ -235,6 +235,25 @@ jobs:
           name: Set status check
           command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
+  test-ubuntu19-node12.14.1:
+    <<: *defaults
+    <<: *environment
+    # override just the docker image
+    docker:
+      - image: cypress/base:ubuntu19-node12.14.1
+    steps:
+      - run: git --version
+      - checkout
+      - run: npm install
+      - run: npm install @cypress/commit-message-install
+      - run: $(npm bin)/commit-message-install --else "npm install cypress"
+      - run: $(npm bin)/run-if npm run verify
+      - run: $(npm bin)/run-if npm run test-full
+      - run:
+          when: on_fail
+          name: Set status check
+          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
+
   after-tests:
     <<: *defaults
     <<: *environment
@@ -270,6 +289,8 @@ workflows:
           context: test-runner:commit-status-checks
       - test-ubuntu18-node12.14.1:
           context: test-runner:commit-status-checks
+      - test-ubuntu19-node12.14.1:
+          context: test-runner:commit-status-checks
       - test-bad-display-variable:
           context: test-runner:commit-status-checks
       # disabling this test - has been failing forever
@@ -289,4 +310,5 @@ workflows:
             - test-ubuntu16-node8
             - test-ubuntu16-node12
             - test-ubuntu18-node12.14.1
+            - test-ubuntu19-node12.14.1
             - test-bad-display-variable
