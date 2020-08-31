@@ -105,42 +105,6 @@ jobs:
           name: Set status check
           command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
 
-  test-full-node8.15.1:
-    <<: *defaults
-    <<: *environment
-    docker:
-      - image: cypress/base:8.15.1
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm install @cypress/commit-message-install
-      - run: $(npm bin)/commit-message-install --else "npm install cypress"
-      - run: $(npm bin)/run-if npm run verify
-      - run: $(npm bin)/run-if npm run test-full
-      - run:
-          when: on_fail
-          name: Set status check
-          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
-
-  test-full-node8.9.3:
-    <<: *defaults
-    <<: *environment
-    docker:
-      # use a newer Docker image with better NPM version to avoid
-      # installation problems
-      - image: cypress/base:8.9.3-npm-6.10.1
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm install @cypress/commit-message-install
-      - run: $(npm bin)/commit-message-install --else "npm install cypress"
-      - run: $(npm bin)/run-if npm run verify
-      - run: $(npm bin)/run-if npm run test-full
-      - run:
-          when: on_fail
-          name: Set status check
-          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
-
   test-full-node10.15.3:
     <<: *defaults
     <<: *environment
@@ -166,26 +130,6 @@ jobs:
     docker:
       - image: cypress/base:centos7
     steps:
-      - checkout
-      - run: npm install
-      - run: npm install @cypress/commit-message-install
-      - run: $(npm bin)/commit-message-install --else "npm install cypress"
-      - run: $(npm bin)/run-if npm run verify
-      - run: $(npm bin)/run-if npm run test-full
-      - run:
-          when: on_fail
-          name: Set status check
-          command: $(npm bin)/set-status --state failure --description "$CIRCLE_STAGE on CircleCI"
-
-  ## Ubuntu 16.04 image - Cypress should work
-  test-ubuntu16-node8:
-    <<: *defaults
-    <<: *environment
-    # override just the docker image
-    docker:
-      - image: cypress/base:ubuntu16-8
-    steps:
-      - run: git --version
       - checkout
       - run: npm install
       - run: npm install @cypress/commit-message-install
