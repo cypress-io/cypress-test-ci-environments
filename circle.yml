@@ -169,6 +169,7 @@ jobs:
     steps:
       - run: git --version
       - checkout
+      - run: apt-get install libgbm-dev
       - run: npm install
       - run: npm install @cypress/commit-message-install
       - run: $(npm bin)/commit-message-install --else "npm install cypress"
