@@ -8,6 +8,7 @@ describe('environment with invalid DISPLAY', () => {
     return execa
       .shell('$(npm bin)/cypress verify', {
         env: {
+          DEBUG: 'cypress:cli',
           DISPLAY: 'wrong-display-value'
         }
       })
@@ -37,6 +38,7 @@ describe('environment with invalid DISPLAY', () => {
     return execa
       .shell('$(npm bin)/cypress run', {
         env: {
+          DEBUG: 'cypress:cli',
           DISPLAY: 'wrong-display-value'
         }
       })
