@@ -219,8 +219,6 @@ workflows:
       - lint
       - test-full:
           context: test-runner:commit-status-checks
-      - test-full-node8.9.3:
-          context: test-runner:commit-status-checks
       - test-full-node10.15.3:
           context: test-runner:commit-status-checks
       - test-bare:
@@ -244,7 +242,6 @@ workflows:
           requires:
             - lint
             - test-full
-            - test-full-node8.9.3
             - test-full-node10.15.3
             - test-bare
             - test-xvfb
