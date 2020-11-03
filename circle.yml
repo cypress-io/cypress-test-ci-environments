@@ -229,8 +229,6 @@ workflows:
           context: test-runner:commit-status-checks
       - test-xvfb:
           context: test-runner:commit-status-checks
-      - test-ubuntu16-node8:
-          context: test-runner:commit-status-checks
       - test-ubuntu16-node12:
           context: test-runner:commit-status-checks
       - test-ubuntu18-node12.14.1:
@@ -253,7 +251,6 @@ workflows:
             - test-full-node10.15.3
             - test-bare
             - test-xvfb
-            - test-ubuntu16-node8
             - test-ubuntu16-node12
             - test-ubuntu18-node12.14.1
             - test-ubuntu19-node12.14.1
