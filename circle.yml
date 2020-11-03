@@ -237,8 +237,8 @@ workflows:
           context: test-runner:commit-status-checks
       - test-ubuntu19-node12.14.1:
           context: test-runner:commit-status-checks
-      - test-bad-display-variable:
-          context: test-runner:commit-status-checks
+      # - test-bad-display-variable:
+      #     context: test-runner:commit-status-checks
       # disabling this test - has been failing forever
       # https://github.com/cypress-io/cypress-test-ci-environments/issues/7
       # - test-centos7
@@ -257,4 +257,4 @@ workflows:
             - test-ubuntu16-node12
             - test-ubuntu18-node12.14.1
             - test-ubuntu19-node12.14.1
-            - test-bad-display-variable
+            # - test-bad-display-variable
