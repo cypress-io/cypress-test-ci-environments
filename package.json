@@ -29,7 +29,7 @@
     "mocha": "9.2.0",
     "debug": "4.3.3",
     "is-ci": "3.0.1",
-    "standard": "10.0.3"
+    "standard": "11.0.0"
   },
   "standard": {
     "globals": [
